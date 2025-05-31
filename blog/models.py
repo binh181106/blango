@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 from django.contrib.contenttypes.models import ContentType 
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 
@@ -18,17 +19,18 @@ class Tag(models.Model):
   def __str__(self):
     return self.value
 
+
 class Post(models.Model):
   author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
   created_at = models.DateTimeField(auto_now_add=True, null=True)
-  modified_at = models.DateTimeField(auto_now_add=True, null=True)
+  modified_at = models.DateTimeField(auto_now=True, null=True)
   published_at = models.DateTimeField(blank=True, null=True)
-  title = models.TextField(max_length = 100)
+  title = models.TextField(max_length=100)
   slug = models.SlugField()
   summary = models.TextField(max_length=500)
   content = models.TextField()
-  tags = models.ManyToManyField(Tag, related_name="posts")
-  comments = GenericRelation(Comment)
+  tags = models.ManyToManyField('Tag', related_name="posts")
+  comments = GenericRelation('Comment')
 
   def __str__(self):
     return self.title
