@@ -90,7 +90,7 @@ class Dev(Configuration):
         'django.contrib.messages',
         'django.contrib.staticfiles',
         'blog',
-        'crispy_form',
+        'crispy_forms',
         'crispy_bootstrap5'
     ]
 

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load blog_extras %}
+{% load blog_extras cache %}
 {% block content %}
 <h2>{{ post.title }}</h2>
 {% row %}
@@ -15,7 +16,9 @@
 {% include "blog/post-comment.html"%}
 {% row %}
     {% col %}
-        {% recent_posts post %}
+        {% cache 3600 recent_posts post%} <!--3600 is seconds, recent_posts is the name of cache-->
+            {% recent_posts post %}       <!--post is the post we're viewing, the posstlist is specific to that post-->  
+        {% endcache %}
     {% endcol %}
 {% endrow %}
 
