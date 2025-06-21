@@ -93,6 +93,7 @@ class Dev(Configuration):
         'crispy_forms',
         'crispy_bootstrap5',
         'debug_toolbar',
+        'blango_auth',
     ]
 
     MIDDLEWARE = [
@@ -161,6 +162,8 @@ class Dev(Configuration):
             'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
         },
     ]
+
+    AUTH_USER_MODEL = "blango_auth.User"
 
 
     # Internationalization
